@@ -82,97 +82,97 @@ you control whatever narative you wish to project to the world, verifiably.
 
 Here is a rough idea of what the Personal History data file would look like:
 
-    '''
-    {"profile": {
-        "username": "wacevedo",
-        "firstname": "William",
-        "lastname": "Acevedo",
-        "password": "encrypted_password"
-      },
-      "years": [
+'''
+{"profile": {
+    "username": "wacevedo",
+    "firstname": "William",
+    "lastname": "Acevedo",
+    "password": "encrypted_password"
+  },
+  "years": [
+    {
+      "year": 2023,
+      "year_hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
+      "months": [
         {
-          "year": 2023,
-          "year_hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
-          "months": [
+          "month": 12,
+          "month_hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
+          "days": [
             {
-              "month": 12,
-              "month_hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
-              "days": [
-                {
-                  "date": 09,
-                  "day_hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
-                  "habits": {
-                    "pushups": {
-                      "pushups-hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
-                      "shareable": "true",
-                      "completed": "100"
-                    },
-                    "pilaties": {
-                      "pilaties-hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
-                      "shareable": "true",
-                      "completed": "1"
-                    },
-                    "wallsits": {
-                      "wallsits-hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
-                      "shareable": "true",
-                      "completed": "1"
-                    },
-                    "sqats": {
-                      "sqats-hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
-                      "shareable": "true",
-                      "completed": "20"
-                    },
-                    "meditation": {
-                      "meditation-hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
-                      "sharable": "true",
-                      "completed": "1"
-                    }
-                  }
+              "date": 09,
+              "day_hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
+              "habits": {
+                "pushups": {
+                  "pushups-hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
+                  "shareable": "true",
+                  "completed": "100"
                 },
-                {
-                  "date": 08,
-                  "day_hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
-                  "habits": {
-                    "pushups": {
-                      "pushups-hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
-                      "shareable": "true",
-                      "completed": "100"
-                    },
-                    "pilaties": {
-                      "pilaties-hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
-                      "shareable": "true",
-                      "completed": "1"
-                    },
-                    "wallsits": {
-                      "wallsits-hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
-                      "shareable": "true",
-                      "completed": "1"
-                    },
-                    "sqats": {
-                      "sqats-hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
-                      "shareable": "true",
-                      "completed": "20"
-                    },
-                    "meditation": {
-                      "meditation-hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
-                      "sharable": "true",
-                      "completed": "1"
-                    }
-                  }
+                "pilaties": {
+                  "pilaties-hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
+                  "shareable": "true",
+                  "completed": "1"
+                },
+                "wallsits": {
+                  "wallsits-hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
+                  "shareable": "true",
+                  "completed": "1"
+                },
+                "sqats": {
+                  "sqats-hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
+                  "shareable": "true",
+                  "completed": "20"
+                },
+                "meditation": {
+                  "meditation-hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
+                  "sharable": "true",
+                  "completed": "1"
                 }
-              ]
+              }
+            },
+            {
+              "date": 08,
+              "day_hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
+              "habits": {
+                "pushups": {
+                  "pushups-hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
+                  "shareable": "true",
+                  "completed": "100"
+                },
+                "pilaties": {
+                  "pilaties-hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
+                  "shareable": "true",
+                  "completed": "1"
+                },
+                "wallsits": {
+                  "wallsits-hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
+                  "shareable": "true",
+                  "completed": "1"
+                },
+                "sqats": {
+                  "sqats-hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
+                  "shareable": "true",
+                  "completed": "20"
+                },
+                "meditation": {
+                  "meditation-hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
+                  "sharable": "true",
+                  "completed": "1"
+                }
+              }
             }
           ]
         }
       ]
     }
-    '''
+  ]
+}
+'''
 
 ## How It works:
     Whenever a new Personal History file is created it will generate:
     * A data Set containing:
-    ..* First name, Last name, date, and time
-    ..* two hashed values representing two pieces of unique and private Personal identifying information (e.g., taxid, password)
+      * First name, Last name, date, and time
+      * two hashed values representing two pieces of unique and private Personal identifying information (e.g., taxid, password)
 
     '''example in python:
         -- example values:

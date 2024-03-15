@@ -82,7 +82,7 @@ you control whatever narative you wish to project to the world, verifiably.
 
 Here is a rough idea of what the Personal History data file would look like:
 
-'''
+```
 {"profile": {
     "username": "wacevedo",
     "firstname": "William",
@@ -166,7 +166,7 @@ Here is a rough idea of what the Personal History data file would look like:
     }
   ]
 }
-'''
+```
 
 ## How It works:
     Whenever a new Personal History file is created it will generate:
@@ -174,38 +174,40 @@ Here is a rough idea of what the Personal History data file would look like:
       * First name, Last name, date, and time
       * two hashed values representing two pieces of unique and private Personal identifying information (e.g., taxid, password)
 
-    '''example in python:
-        -- example values:
+```
+example in python:
+    -- example values:
 
-        firstname = "herman", 
-        lastname = "munster", 
-        tax_id = "8765309", 
-        password = "123456789"
+    firstname = "herman", 
+    lastname = "munster", 
+    tax_id = "8765309", 
+    password = "123456789"
 
-        -- example output of function used to generate desired output:
-        generate_priliminary_hash_values(firstname, lastname, tax_id, password)
-        
-        output:
-        There are two sets of data created:
-        ..* the date and time this data was created, and the first and last name in clear text.
-        ..* Hashes created from the firstname, lastname
+    -- example output of function used to generate desired output:
+    generate_priliminary_hash_values(firstname, lastname, tax_id, password)
+    
+    output:
+    There are two sets of data created:
+    ..* the date and time this data was created, and the first and last name in clear text.
+    ..* Hashes created from the firstname, lastname
 
-        [
-            {'encoded_creation_time': '1710540432.688816', <- epoch time number converts to 15/03/2024 23:07
-             'firstname': 'herman',
-             'lastname': 'munster'},
+    [
+        {'encoded_creation_time': '1710540432.688816', <- epoch time number converts to 15/03/2024 23:07
+         'firstname': 'herman',
+         'lastname': 'munster'},
 
-            {'hashed_creation_time': '7b6197b0e5f3f29c2a1df1715c287050b91ecfe68e2f04d572c74ead907c16e6',
-            'hashed_tax_id': '5cfaae462bf88066c36bed21fb07bbee16acf6b110840f57c7b2a760dbc80919',         
-            'hashed_password': '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225',
-            'hashed_firstname': '3bf39bf3fe465c0600105b3451f274fa9f05b3c706f022608c0fb28285fe5cbf',
-            'hashed_lastname': '7cbd75a33e3f9ceba58eab97dd18cd7866d398f3d56542d64e80a369a36dadab'}
-        ]'''
+        {'hashed_creation_time': '7b6197b0e5f3f29c2a1df1715c287050b91ecfe68e2f04d572c74ead907c16e6',
+        'hashed_tax_id': '5cfaae462bf88066c36bed21fb07bbee16acf6b110840f57c7b2a760dbc80919',         
+        'hashed_password': '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225',
+        'hashed_firstname': '3bf39bf3fe465c0600105b3451f274fa9f05b3c706f022608c0fb28285fe5cbf',
+        'hashed_lastname': '7cbd75a33e3f9ceba58eab97dd18cd7866d398f3d56542d64e80a369a36dadab'}
+    ]
+```
 
-    to reiterate:
-    * The data creation time (epoch) is 1710540432.688816, which converts to 15/03/2024 23:07 **equals** 7b6197b0e5f3f29c2a1df1715c287050b91ecfe68e2f04d572c74ead907c16e6
-    * If any part of the date or time is changed, in any form, the original hash number will not match.
-    * This process of verification can be done with any, and all forms of data (text, images, video, audio)
+to reiterate:
+* The data creation time (epoch) is 1710540432.688816, which converts to 15/03/2024 23:07 **equals** 7b6197b0e5f3f29c2a1df1715c287050b91ecfe68e2f04d572c74ead907c16e6
+* If any part of the date or time is changed, in any form, the original hash number will not match.
+* This process of verification can be done with any, and all forms of data (text, images, video, audio)
     
 ### This data set is saved within the Personal History File, and then this data is used to generate the file name and used as the first hash which identifies the current year.
 

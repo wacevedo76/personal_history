@@ -58,7 +58,7 @@ to say anything.
 
 ## What is Personal History?
 
-The Personal History file is simply a data file where you can quickly record, and
+The Personal History file is simply a JSON data file where you can quickly record, and
 effotlessly save whatever it is you want to share, in a file which you 
 completely own. Every set of shared data is then used in conjunction with 
 other unique data to generate a hash key that is unique and directly tide 
@@ -169,50 +169,134 @@ Here is a rough idea of what the Personal History data file would look like:
 ```
 
 ## How It works:
-    Whenever a new Personal History file is created it will generate:
-    * A data Set containing:
-      * First name, Last name, date, and time
-      * two hashed values representing two pieces of unique and private Personal identifying information (e.g., taxid, password)
+Whenever a new Personal History file is created it will generate:
+* A data Set containing:
+  * First name, Last name, date, and time
+  * two hashed values representing two pieces of unique and private Personal identifying information (e.g., taxid, password)
 
-```
 example in python:
-    -- example values:
+```
+-- example values:
 
-    firstname = "herman", 
-    lastname = "munster", 
-    tax_id = "8765309", 
-    password = "123456789"
-
-    -- example output of function used to generate desired output:
-    generate_priliminary_hash_values(firstname, lastname, tax_id, password)
-    
-    output:
-    There are two sets of data created:
-    ..* the date and time this data was created, and the first and last name in clear text.
-    ..* Hashes created from the firstname, lastname
-
-    [
-        {'encoded_creation_time': '1710540432.688816', <- epoch time number converts to 15/03/2024 23:07
-         'firstname': 'herman',
-         'lastname': 'munster'},
-
-        {'hashed_creation_time': '7b6197b0e5f3f29c2a1df1715c287050b91ecfe68e2f04d572c74ead907c16e6',
-        'hashed_tax_id': '5cfaae462bf88066c36bed21fb07bbee16acf6b110840f57c7b2a760dbc80919',         
-        'hashed_password': '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225',
-        'hashed_firstname': '3bf39bf3fe465c0600105b3451f274fa9f05b3c706f022608c0fb28285fe5cbf',
-        'hashed_lastname': '7cbd75a33e3f9ceba58eab97dd18cd7866d398f3d56542d64e80a369a36dadab'}
-    ]
+firstname = "herman", 
+lastname = "munster", 
+tax_id = "8765309", 
+password = "123456789"
 ```
 
-to reiterate:
+-- example output of function used to generate desired output:
+```
+generate_priliminary_hash_values(firstname, lastname, tax_id, password)
+```
+
+output:
+There are two sets of data created:
+..* the date and time this data was created, and the first and last name in clear text.
+..* Hashes created from the firstname, lastname
+```
+[
+    {'encoded_creation_time': '1710540432.688816', # epoch time number converts to 15/03/2024 23:07
+     'firstname': 'herman',
+     'lastname': 'munster'},
+
+    {'hashed_creation_time': '7b6197b0e5f3f29c2a1df1715c287050b91ecfe68e2f04d572c74ead907c16e6',
+    'hashed_tax_id': '5cfaae462bf88066c36bed21fb07bbee16acf6b110840f57c7b2a760dbc80919',         
+    'hashed_password': '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225',
+    'hashed_firstname': '3bf39bf3fe465c0600105b3451f274fa9f05b3c706f022608c0fb28285fe5cbf',
+    'hashed_lastname': '7cbd75a33e3f9ceba58eab97dd18cd7866d398f3d56542d64e80a369a36dadab'}
+]
+```
+
+### to reiterate:
 * The data creation time (epoch) is 1710540432.688816, which converts to 15/03/2024 23:07 **equals** 7b6197b0e5f3f29c2a1df1715c287050b91ecfe68e2f04d572c74ead907c16e6
 * If any part of the date or time is changed, in any form, the original hash number will not match.
 * This process of verification can be done with any, and all forms of data (text, images, video, audio)
     
 ### This data set is saved within the Personal History File, and then this data is used to generate the file name and used as the first hash which identifies the current year.
 
-    '''
-    example in python code:
+## Why is hashing important?
+Hashing is "one way", meaning that while the information can be verified with the hash number,
+the hash number can not be used to generate, or get the original information, i,e:
 
-    '''
+your tax ID is: 123456789, and this number is used generate "5cfaae462bf88066c36bed21fb07bbee16acf6b110840f57c7b2a760dbc80919",
+however, "5cfaae462bf88066c36bed21fb07bbee16acf6b110840f57c7b2a760dbc80919" can not be used to 
+generate your tax ID. This is a common menthod of authentication for websites, meaning this is how 
+they verify your password without storing your actual password on their servers.
 
+example in python code using previously generated data:
+```
+personal_history_userdata01 = [
+    {'encoded_creation_time': '1710540432.688816', <- epoch time number converts to 15/03/2024 23:07 ```
+     'firstname': 'herman',
+     'lastname': 'munster'},
+                                                                                                     
+    {'hashed_creation_time': '7b6197b0e5f3f29c2a1df1715c287050b91ecfe68e2f04d572c74ead907c16e6',
+    'hashed_tax_id': '5cfaae462bf88066c36bed21fb07bbee16acf6b110840f57c7b2a760dbc80919',         
+    'hashed_password': '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225',
+    'hashed_firstname': '3bf39bf3fe465c0600105b3451f274fa9f05b3c706f022608c0fb28285fe5cbf',
+    'hashed_lastname': '7cbd75a33e3f9ceba58eab97dd18cd7866d398f3d56542d64e80a369a36dadab'}
+]
+```
+Using this data, we can now generate the file name and the hash for the current year:
+
+Possible function in Python:
+```
+create_ph_hashed_day_file_name(personal_history_userdata01)
+```
+Output:
+```
+['b8b77a5b311fb3a27b425bcab6a170fc499a2fe68170f50a2baa82bdacc3ea25',
+ [{'encoded_creation_time': '1710540432.688816',
+   'firstname': 'herman',
+   'lastname': 'munster'},
+  {'hashed_creation_time': '7b6197b0e5f3f29c2a1df1715c287050b91ecfe68e2f04d572c74ead907c16e6',
+   'hashed_tax_id': '5cfaae462bf88066c36bed21fb07bbee16acf6b110840f57c7b2a760dbc80919',
+   'hashed_password': '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225',
+   'hashed_firstname': '3bf39bf3fe465c0600105b3451f274fa9f05b3c706f022608c0fb28285fe5cbf',
+   'hashed_lastname': '7cbd75a33e3f9ceba58eab97dd18cd7866d398f3d56542d64e80a369a36dadab'}]]
+```
+
+The first value in the list provided above:
+```
+b8b77a5b311fb3a27b425bcab6a170fc499a2fe68170f50a2baa82bdacc3ea25
+```
+Is a hash value generated from the combination of:
+* hashed_creation_time
+* hashed_tax_id
+* hashed_password
+* hashed_firstname
+* hashed_lastname
+
+and will be both the primary file name, and the hashed value of the current year.
+
+filename:
+```
+b8b77a5b311fb3a27b425bcab6a170fc499a2fe68170f50a2baa82bdacc3ea25.ph
+```
+and contents of file:
+```
+{"profile": {
+    "firstname": "herman",
+    "lastname": "munster",
+    "creation_date": "1710540432.688816",
+    "tax_id": "5cfaae462bf88066c36bed21fb07bbee16acf6b110840f57c7b2a760dbc80919"
+    "password": "15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225"
+  },
+  "years": [
+    {
+      "year": 2023,
+      "year_hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
+```
+## Okay, so now what?
+Once the year hash has been generated, the content creation flow goes as follows:
+
+In essense, each layer of data is created by using a combination of:
+* up to the previous 10 hashes
+* and any relavent data needed at the current 
+
+the month has is generated by using a combination of:
+* the preceeding hash (in this case, the year hash).
+* the Time the Month has creation takes place
+
+The Day hash is generated by using a combination of:
+* The combined text of both the m

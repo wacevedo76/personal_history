@@ -61,8 +61,9 @@ to say anything.
 The Personal History file is simply a JSON data file where you can quickly record, and
 effotlessly save whatever it is you want to share, in a file which you 
 completely own. Every set of shared data is then used in conjunction with 
-other unique data to generate a hash key that is unique and directly tide 
-the data you shared.
+other unique data to generate a hash (the hashin algorithm used is sha256, for reference,
+but will will simply be refered to as hash for the remainder of this document)
+key that is unique and directly tide to the data you shared.
 
 If the data is changed or manipuated in any way, the generated key will not only 
 not match coresponding data, but also compromising the integrity of all data 

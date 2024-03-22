@@ -32,36 +32,31 @@ def generate_hash_values(
     #            "hashed_lastname": hashed_lastname}
     #    ]
     '''
+    def hash_generator(raw_data):
+        hashed_data = hashlib.sha256()
+        hashed_data.update(raw_data.encode('utf-8'))
+        data_hash = hashed_data.hexdigest()
+
+        return data_hash
 
     # Generate epoc time stamp for date_file_epoch used to
     # denote fi# Get the current datetime object
     current_datetime = datetime.datetime.now()
     current_epoch_time = str(current_datetime.timestamp())
     current_epoch_time_str = str(current_epoch_time)
-    encoded_current_datetime = current_epoch_time.encode('utf-8')
-    encoded_epoch_time_hash = hashlib.sha256()
-    encoded_epoch_time_hash.update(encoded_current_datetime)
-    hashed_epoch_time = encoded_epoch_time_hash.hexdigest()
+    hashed_epoch_time = hash_generator(current_epoch_time)
 
-    # Generate a sha256 for the tax_id
-    encoded_tax_id_hash = hashlib.sha256()
-    encoded_tax_id_hash.update(tax_id.encode('utf-8'))
-    hashed_tax_id = encoded_tax_id_hash.hexdigest()
+    # Generate a sha256 for tax_id
+    hashed_tax_id = hash_generator(tax_id)
 
-    # Generate a sha256 for the password
-    encoded_password_hash = hashlib.sha256()
-    encoded_password_hash.update(password.encode('utf-8'))
-    hashed_password = encoded_password_hash.hexdigest()
+    # Generate a sha256 for password
+    hashed_password = hash_generator(password)
 
     # Generate a sha256 for firstname
-    encoded_firstname_hash = hashlib.sha256()
-    encoded_firstname_hash.update(firstname.encode('utf-8'))
-    hashed_firstname = encoded_firstname_hash.hexdigest()
+    hashed_firstname = hash_generator(firstname)
 
     # Generate a sha256 for lastname
-    encoded_lastname_hash = hashlib.sha256()
-    encoded_lastname_hash.update(lastname.encode('utf-8'))
-    hashed_lastname = encoded_lastname_hash.hexdigest()
+    hashed_lastname = hash_generator(lastname)
 
     # Return a list of two dictionaries, the first with the creation time Name,
     # and the second one containing the filename creation time, and the hashed

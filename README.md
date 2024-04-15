@@ -9,7 +9,7 @@ Copyright 2024 William Acevedo
 PERSONAL HISTORY is way to quickly and easily journal all personal human activity
 that adds verification to all entries.
 
-We are well into the digital age where we have the technology to begin seemlessly
+We are well into the digital age where we have the technology to begin to seemlessly
 and effortlessly documenting our lives. 
 
 #### The idea of a "Personal History" encapsulates this overall Principle:
@@ -22,7 +22,7 @@ and effortlessly documenting our lives.
 * The ability to use this collected data to analyze how our day is utilized.
 * The ability to have a definitive record of the how idividual changes and grows over time.
 * Provides a definitive record of how long, and how offen we engage or practice a set of skills, which can aid in reputation construction.
-* It can help the individual protect themselves from fraud and misinformation attacts.
+* It can help the individual protect themselves from fraud and misinformation attacks.
 
 
 ##### On a Communal level:
@@ -47,16 +47,16 @@ particularly one aspect of Free Speech the I would like to focus on:
 
 * That aspect is the Freedom to Share
 
-This Freedom is not being attacted by any government, but by technology.
+This Freedom is not being attacked by any government, but by technology.
 It is so easy the manipulate video, audio, using modern software, not even 
-mentioning text, because mass text manipulation tools have existed not shortly 
+mentioning text, because mass text manipulation tools have existed since not shortly 
 after the invention of the microcontroller (not sure, maybe even earlier) but 
 now have become even tools a lay person can use.
 
 We now have the technology to map the human face digitally, and use this 
 digital information to replicate that person's likeness virtually, on still image and
 in video. Grant it, the technology is in its early stages, but with the rise
-more powerful machines, and software development, and Artificial Intelligence 
+more powerful machines, software development, and Artificial Intelligence 
 it will no doubt improve exponetially relativly quickly.
 
 There needs to be a quick, effortless, and most importantly, a method 
@@ -86,10 +86,11 @@ The Personal History file is simply a JSON data file where you can quickly recor
 effotlessly save whatever it is you want to share, in a file which you 
 completely own. Every set of shared data is then used in conjunction with 
 other unique data to generate a hash (the hashing algorithm used is sha256, for reference,
-but will will simply be refered to as hash for the remainder of this document)
+but will simply be refered to as hash for the remainder of this document)
 key that is unique and directly tide to the data you shared.
 
-If the data is changed or manipuated in any way, the generated key will not only **not** match coresponding data, but will also compromise the integrity of all data 
+If the data is changed or manipuated in any way, the generated key will not only 
+**not** match coresponding data, but will also compromise the integrity of all data 
 entered thereafter.
 
 The goal is to generate a file, which you keep, like a journal, that  

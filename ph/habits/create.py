@@ -116,7 +116,7 @@ def create_ph_hashed_day_file_name(userdata: List) -> List:
     file_name_hash.update(file_name_hash_str.encode('utf-8'))
     filename = file_name_hash.hexdigest()
 
-    return [filename, userdata]
+    return [filename]
 
 
 def create_file(filename: str, userdata: List, directory_path):

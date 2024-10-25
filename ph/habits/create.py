@@ -108,14 +108,36 @@ def create_ph_filename(userdata: Dict) -> Dict:
          * to create the file name that is unique but easily 
            identifyable without including constantly changing data
 
-       The rational behind this being that the create_ph_day_file stores
+       The rational behind this being that the create_ph_filename stores
        the habits in a database prior to a sync.
 
        The term SYNC in this context being that manipulating collumns in
        a database is much easier and much more time efficient.
        collecting rows for a table and parsing the returnd data (being the
        entire table) into JSON, the giving us the data to sink with
-       the Personal_Life Repository'''
+       the Personal_Life Repository
+
+       the Return value for create_ph_filename:
+
+       {
+        "user_raw_data": {
+            "creation_time": creation_time,
+            "epoch_time": epoch_time,
+            "firstname": firstname,
+            "lastname": lastname,
+       },
+        "user_hashes": {
+            "hashed_firstname": hashed_firstname,
+            "hashed_lastname": hashed_lastname,
+            "hashed_creation_time": hashed_creation_time,
+            "hashed_tax_id": hashed_tax_id,
+            "hashed_password": hashed_password,
+            "userdata_hashes": userdata_hashes
+       },
+        "filename": filename
+
+
+       '''
 
     # Unpack userdata
     ph_owner_values, ph_owner_hashed_values = userdata["user_data"], userdata["user_hashes"]

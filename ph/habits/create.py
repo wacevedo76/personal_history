@@ -23,7 +23,7 @@ def generate_hash_values(
     # the following values:
     #
     #    [
-    #        {"encoded_creation_time": current_epoch_time_str,
+    #        {"epoch_time": current_epoch_time_str,
     #         "firstname": firstname,
     #         "lastname": lastname},
     #        {"hashed_creation_time": hashed_epoch_time,
@@ -33,6 +33,8 @@ def generate_hash_values(
     #            "hashed_lastname": hashed_lastname}
     #    ]
     '''
+
+    # Helper function for generating hash strings
     def _hash_generator(raw_data):
         hashed_data = hashlib.sha256()
         hashed_data.update(raw_data.encode('utf-8'))
@@ -40,6 +42,7 @@ def generate_hash_values(
 
         return data_hash
 
+    # Helper function for converting epoch time stamp to readable time
     def _certs(epochtime):    # (c)onvert (e)poch (t)o (r)readable (s)tring
         dtobj = datetime.fromtimestamp(epochtime)
         return dtobj.strftime("%A, %B, %d, %Y %H:%M:%S")
@@ -82,21 +85,23 @@ def generate_hash_values(
 
     # Return a list of two dictionaries, the first with the creation time and names,
     # and the second with the hashed values
-    return [
-        {"creation_time": current_epoch_time_readable,
-         "encoded_creation_time": current_epoch_time_str,
-         "firstname": firstname,
-         "lastname": lastname},
-        {"hashed_firstname": hashed_firstname,
-         "hashed_lastname": hashed_lastname,
-         "hashed_creation_time": hashed_epoch_time,
-         "hashed_tax_id": hashed_tax_id,
-         "hashed_password": hashed_password,
-         "userdata_hash": filehash}
-    ]
+    return {
+        "user_data":
+            {"creation_time": current_epoch_time_readable,
+             "epoch_time": current_epoch_time_str,
+             "firstname": firstname,
+             "lastname": lastname},
+        "user_hashes":
+            {"hashed_firstname": hashed_firstname,
+             "hashed_lastname": hashed_lastname,
+             "hashed_creation_time": hashed_epoch_time,
+             "hashed_tax_id": hashed_tax_id,
+             "hashed_password": hashed_password,
+             "userdata_hashes": filehash}
+    }
 
 
-def create_ph_hashed_day_file_name(userdata: List) -> str:
+def create_ph_filename(userdata: Dict) -> Dict:
     '''This function goes about creating the name for the Personal History 
     Date (PHD) file name.
        The idea befind this function is:
@@ -113,35 +118,37 @@ def create_ph_hashed_day_file_name(userdata: List) -> str:
        the Personal_Life Repository'''
 
     # Unpack userdata
-    ph_owner_values, ph_owner_hashed_values = userdata[0], userdata[1]
+    ph_owner_values, ph_owner_hashed_values = userdata["user_data"], userdata["user_hashes"]
 
     # Unpack values from ph_owner_values
-    creation_time, encoded_creation_time, firstname, lastname = ph_owner_values.values()
+    creation_time, epoch_time, firstname, lastname = ph_owner_values.values()
 
     # Unpack values from ph_owner_hashed_values
     hashed_firstname, hashed_lastname, hashed_creation_time, hashed_tax_id, \
-    hashed_password = ph_owner_hashed_values.values()
+    hashed_password, userdata_hashes = ph_owner_hashed_values.values()
 
-    # Generate hash from combined hash values of:
-    #   * hashed_firstname
-    #   * hashed_lastname
-    #   * hashed_tax_id
-    #   * hashed_creation_time
+    # Create filename from:
+    #    <firstname>_<lastname>-<epoch_time>
+    filename = ''.join([firstname, '_', lastname, '-', epoch_time])
 
-    # join all the hashed values into a single string
-    # for the pupose of creating the very first hash value for the personal 
-    # history file
-    userdata_hash_value = ''.join(
-        [hashed_firstname,
-         hashed_lastname,
-         hashed_tax_id,
-         hashed_creation_time])
-
-    init_file_name_hash = hashlib.sha256()
-    file_name_hash.update(file_name_hash_str.encode('utf-8'))
-    init_hashstring = file_name_hash.hexdigest()
-
-    return filename
+    return {
+        "user_raw_data": {
+            "creation_time": creation_time,
+            "epoch_time": epoch_time,
+            "firstname": firstname,
+            "lastname": lastname,
+        },
+        "user_hashes": {
+            "hashed_firstname": hashed_firstname,
+            "hashed_lastname": hashed_lastname,
+            "hashed_creation_time": hashed_creation_time,
+            "hashed_tax_id": hashed_tax_id,
+            "hashed_password": hashed_password,
+            "userdata_hashes": userdata_hashes
+        },
+        "filename": filename
+    }
+    
 
 
 def create_file(filename: str, userdata: List, directory_path):

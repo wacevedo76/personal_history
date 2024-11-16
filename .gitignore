@@ -4,6 +4,9 @@ __pycache__/
 *$py.class
 architecture.md
 
+# Personal ignores
+Roadman/
+
 # C extensions
 *.so
 

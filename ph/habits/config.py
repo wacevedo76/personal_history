@@ -1,2 +1,2 @@
 # Setting for PH file location
-PY_FILE_LOCATION = "./.ph"
+PY_FILE_LOCATION = "./.ph/userfile"

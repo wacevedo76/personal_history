@@ -1,0 +1,88 @@
+{
+  "version": "0.01.0",
+  "identity": {
+    "hash": "e4fefbee811ebc480aa403e496c72efbe5f8db882a202492269c0a07ed0934dc",
+    "name": "William Acevedo"
+  },
+  "timeline": [
+    {
+      "date": "2024-01-01",
+      "timestamp": {
+        "commitment": "fc757c47a38f27f934445a9ae49dacb37cd6847043de60e8d6e04bf54d750595"
+      },
+      "activities": [
+        {
+          "type": "family",
+          "data": {
+            "activity": "breakfast",
+            "meal": "pancakes",
+            "with": [
+              "wife",
+              "son"
+            ]
+          },
+          "duration": 45,
+          "timestamp": {
+            "commitment": "fc757c47a38f27f934445a9ae49dacb37cd6847043de60e8d6e04bf54d750595"
+          },
+          "shareable": true,
+          "hash": "655c3fdcac540fb43e5275f6e8457dec380d12b40ea444601665d94f72e0d4be"
+        },
+        {
+          "type": "work",
+          "data": {
+            "project": "personal_history",
+            "task": "v0.01 implementation"
+          },
+          "duration": 120,
+          "timestamp": {
+            "commitment": "afba594a8852342797d74fceb10a183f27c5547cc9e4518cf8610407da40fefa"
+          },
+          "shareable": true,
+          "hash": "2ff7784fdd749e6c78e4811bfccd0c0fb848355495ef9224b84907aa705f449d"
+        },
+        {
+          "type": "exercise",
+          "data": {
+            "activity": "running",
+            "distance_km": 5.2
+          },
+          "duration": 28,
+          "timestamp": {
+            "commitment": "2e6bda563b236fb9251117fd18a05e6de63f1933752a273f441e15e879d2bd61"
+          },
+          "shareable": true,
+          "hash": "69332aecffdd2aee04825e8939217ff11a54e7c70572e8f454a66a67c1d98b92"
+        },
+        {
+          "type": "cooking",
+          "data": {
+            "meal": "kotlet_schabowy",
+            "for_people": 3
+          },
+          "duration": 40,
+          "timestamp": {
+            "commitment": "c432e9a0704c942af333916ac5f22feea3b3edd3e2d46de26498a2be5da5d996"
+          },
+          "shareable": true,
+          "hash": "e9ce533a1eea857557f41a09d3c7c97f82f8376318ea5cfa45c1be9c26992aea"
+        },
+        {
+          "type": "personal",
+          "data": {
+            "activity": "doctor_appointment"
+          },
+          "duration": 60,
+          "timestamp": {
+            "commitment": "d6a044ec290de237a77fd0b2cc3c07b8309fc1a8861763ba1d5698a819a32191"
+          },
+          "shareable": false,
+          "hash": "4c9e0137e310a3af86c7a3b01156f06dab4b7954ee0fb618f4f8213519fb328a"
+        }
+      ],
+      "hash": "7331cf3bec848457491746f1581b9659f148f4aa8e2e55c51be03f9d3f104279",
+      "note": "New Year's Day - Family, work, exercise, and traditional dinner"
+    }
+  ],
+  "signature": "simulated_fdd5dddcd70bff6f963ff6467c125d3f27bddd07cbc599db982ec001816b3f57"
+}

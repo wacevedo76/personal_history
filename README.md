@@ -43,6 +43,15 @@ personal_history/
 
 ## Development
 
+### Git Branch Strategy
+```
+main    - Stable, production-ready releases
+dev     - Development integration (current)
+feature/* - Feature branches off dev
+```
+
+**Current branch:** `dev` (v0.01 implementation)
+
 ### Install for Development
 ```bash
 # From the root directory (this one)

@@ -525,6 +525,48 @@ def demo_command(args):
     print("All v0.01 features are working correctly.")
 
 
+def timestamps_command(args):
+    """Extract and analyze timestamps from Personal History file"""
+    from .timestamps import (
+        extract_timestamps,
+        analyze_time_patterns,
+        export_timestamps_csv,
+        print_timestamp_summary
+    )
+    
+    # If no file specified, use default
+    if args.file is None:
+        default_file = Path.home() / "personal_history.ph.json"
+        if default_file.exists():
+            args.file = default_file
+            print(f"Using default file: {args.file}")
+        else:
+            print("Error: No file specified and default file not found.")
+            print(f"Default location: {default_file}")
+            print("Run 'ph sync' first to create a history file, or specify a file.")
+            sys.exit(1)
+    
+    if not args.file.exists():
+        print(f"Error: File not found: {args.file}")
+        return
+    
+    if args.summary:
+        print_timestamp_summary(args.file)
+    
+    elif args.analyze:
+        analysis = analyze_time_patterns(args.file)
+        print(json.dumps(analysis, indent=2))
+    
+    elif args.export_csv:
+        output_file = export_timestamps_csv(args.file)
+        print(f"✓ Timestamps exported to: {output_file}")
+    
+    else:
+        # Default: show extracted timestamps
+        timestamps = extract_timestamps(args.file)
+        print(json.dumps(timestamps, indent=2))
+
+
 def main():
     """Main CLI entry point"""
     parser = argparse.ArgumentParser(
@@ -583,6 +625,13 @@ def main():
     # Demo command
     subparsers.add_parser("demo", help="Run demonstration of v0.01 features")
     
+    # Timestamps command
+    timestamps_parser = subparsers.add_parser("timestamps", help="Extract and analyze timestamps")
+    timestamps_parser.add_argument("file", type=Path, nargs="?", default=None, help=".ph.json file (default: ~/personal_history.ph.json)")
+    timestamps_parser.add_argument("--export-csv", action="store_true", help="Export timestamps to CSV")
+    timestamps_parser.add_argument("--analyze", action="store_true", help="Analyze time patterns")
+    timestamps_parser.add_argument("--summary", action="store_true", help="Print human-readable summary")
+    
     args = parser.parse_args()
     
     if not args.command:
@@ -611,6 +660,8 @@ def main():
             analyze_command(args)
         elif args.command == "demo":
             demo_command(args)
+        elif args.command == "timestamps":
+            timestamps_command(args)
     except Exception as e:
         print(f"Error: {e}")
         sys.exit(1)

@@ -1,0 +1,16 @@
+# Development dependencies for Personal History
+# Install with: pip install -r requirements-dev.txt
+
+# Testing
+pytest>=7.0.0
+pytest-cov>=4.0.0
+pytest-mock>=3.0.0
+
+# Code quality
+black>=23.0.0
+flake8>=6.0.0
+mypy>=1.0.0
+
+# Optional: for better test output
+pytest-xdist>=3.0.0  # Parallel test execution
+pytest-html>=4.0.0   # HTML test reports

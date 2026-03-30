@@ -309,7 +309,55 @@ There may be multiple, dozens, multiple data points per day, and each data point
 
 ## Current Implementation (v0.01)
 
-The project has evolved into a practical Python implementation with a command-line interface.
+The project has evolved into a practical Python implementation with a command-line interface featuring:
+
+### 🚀 Key Features
+
+#### **Time Tracking System**
+- `ph start <activity>` - Start timing any activity
+- `ph stop <activity>` - Stop timing and calculate elapsed time
+- `ph tasks` - View active timers and pending activities
+- Automatic duration calculation (real elapsed time, not future time)
+
+#### **Smart Duration Parsing**
+- Multiple time formats: `"90"`, `"1h30"`, `"2h"`, `"45m"`, `"1.5h"`, `"1:30"`
+- Case-insensitive, handles spaces
+- Integrated with both manual entry and time tracking
+
+#### **Data Analysis**
+- `ph analyze` - Analyze time from history files (default file support)
+- `ph timestamps` - Extract and analyze exact timestamps
+- CSV export for spreadsheet analysis
+- Time pattern analysis and reporting
+
+#### **Verification & Integrity**
+- Cryptographic identity generation (Ed25519)
+- Hash chain verification for data integrity
+- Timestamp commitments for privacy
+- File signature validation
+
+#### **MVC Architecture**
+- Clean separation of models, controllers, and views
+- Ready for multiple interfaces (CLI, API, Web, etc.)
+- Backward compatible with existing code
+- Extensible for future features
+
+### 📊 Data Structure
+
+Personal History v0.01 files contain:
+- **Identity**: Cryptographic identity with public/private keys
+- **Timeline**: Chronological days with activities
+- **Activities**: Time-stamped entries with optional data
+- **Hashes**: SHA-256 hashes for verification
+- **Signatures**: Optional Ed25519 signatures
+
+Each activity includes:
+- Type (work, exercise, meal, etc.)
+- Duration in minutes
+- Optional data (project, distance, people, etc.)
+- Shareable flag for privacy control
+- Exact timestamps (hidden in commitment)
+- Cryptographic commitments for verification
 
 ### Quick Start
 
@@ -358,29 +406,129 @@ personal_history/
         └── README.md     # Detailed technical documentation
 ```
 
-### Basic Commands
+### Complete Command Reference
 
+#### Identity Management
 ```bash
 # Initialize your identity
 ph init --name "Your Name"
 
+# Verify your identity file
+ph verify ~/.personal_history/identity.json
+```
+
+#### Activity Management
+```bash
 # Add activities with smart duration parsing
 ph add work --duration "1h30" --project "Personal History"
 ph add exercise --duration "45m" --distance 5
 ph add reading --duration "1.5h"
+ph add cooking --meal "dinner" --with-people "family"
+ph add meeting --duration "1:30" --project "team" --private
 
-# Time tracking
-ph start "writing documentation" --type work --project "PH"
-ph tasks  # See active timers
-ph stop "writing documentation" --auto-add  # Stop and auto-add
+# Smart duration formats supported:
+# - "90" (minutes)
+# - "1h30" or "1hr30" (1 hour 30 minutes)
+# - "2h" (2 hours)
+# - "45m" (45 minutes)
+# - "1.5h" (1.5 hours)
+# - "1:30" (1 hour 30 minutes)
+```
 
-# View and sync
+#### Time Tracking (New!)
+```bash
+# Start timing an activity
+ph start "writing documentation" --type work --project "Personal History"
+ph start "morning workout" --type exercise
+ph start "cooking dinner" --type cooking --meal "pasta"
+
+# Check active timers and pending activities
+ph tasks
+
+# Stop timing and calculate elapsed time
+ph stop "writing documentation" --auto-add  # Auto-adds to pending
+ph stop "morning workout"                   # Asks for confirmation
+
+# View pending activities
 ph pending
-ph sync  # Sync to history file
+```
 
-# Analyze
-ph analyze  # Analyze default history file
-ph timestamps --summary  # View timestamp analysis
+#### File Operations
+```bash
+# Sync pending activities to history file
+ph sync
+
+# Verify Personal History file
+ph verify personal_history.ph.json
+
+# Analyze time from history file (default: ~/personal_history.ph.json)
+ph analyze
+ph analyze --export-shareable  # Export shareable activities
+
+# Extract and analyze timestamps
+ph timestamps --summary        # Human-readable summary
+ph timestamps --analyze        # JSON analysis of time patterns
+ph timestamps --export-csv     # Export to CSV for spreadsheets
+```
+
+#### Demonstration
+```bash
+# Run a complete demonstration of all features
+ph demo
+```
+
+### Example Workflows
+
+#### Daily Time Tracking
+```bash
+# Morning routine
+ph start "morning meditation" --type wellness
+ph stop "morning meditation" --auto-add
+
+ph start "breakfast" --type meal --meal "oatmeal"
+ph stop "breakfast" --auto-add
+
+# Work session
+ph start "coding session" --type work --project "API Development"
+# ... work for a while ...
+ph stop "coding session" --auto-add
+
+# Check what's pending
+ph tasks
+ph pending
+
+# End of day sync
+ph sync
+```
+
+#### Weekly Review
+```bash
+# Analyze your week
+ph analyze
+
+# Export timestamps for spreadsheet analysis
+ph timestamps --export-csv
+
+# Check file integrity
+ph verify ~/personal_history.ph.json
+```
+
+#### Project Tracking
+```bash
+# Track time on specific projects
+ph start "feature development" --type work --project "User Authentication"
+ph start "bug fixing" --type work --project "API Performance"
+
+# See active project work
+ph tasks
+
+# Stop and record
+ph stop "feature development" --auto-add
+ph stop "bug fixing" --auto-add
+
+# Sync and analyze project time
+ph sync
+ph analyze
 ```
 
 ### Development
@@ -439,6 +587,65 @@ python3 -m venv venv
 source venv/bin/activate
 pip install -e .
 ```
+
+## From Vision to Reality
+
+### Original Vision → Current Implementation
+
+| Original Concept | Current v0.01 Implementation |
+|-----------------|-----------------------------|
+| **Philosophical foundation** of "Right to Share" | ✅ Preserved in architecture |
+| **JSON data structure** for personal history | ✅ Implemented with schema validation |
+| **Hash-based verification** chain | ✅ SHA-256 hashes with cryptographic commitments |
+| **Privacy controls** (shareable flags) | ✅ Activity-level privacy controls |
+| **Timestamp integrity** | ✅ ISO 8601 timestamps with hidden exact times |
+| **Command-line interface** | ✅ Full-featured CLI with 11 commands |
+| **Time tracking** | ✅ Start/stop/tasks system with automatic timing |
+| **Data analysis** | ✅ Analyze, timestamps, CSV export features |
+| **Extensible architecture** | ✅ MVC pattern ready for APIs, web interfaces |
+
+### What Makes Personal History Unique
+
+1. **You Own Your Data** - Files are stored locally, not in the cloud
+2. **Verifiable Integrity** - Cryptographic hashes prove data hasn't been altered
+3. **Privacy by Design** - Share only what you want, keep private what you don't
+4. **Effortless Tracking** - Smart duration parsing and automatic time tracking
+5. **Future-Proof** - MVC architecture ready for new interfaces and features
+
+## Getting Help
+
+### Common Issues
+```bash
+# Command not found after install
+source venv/bin/activate  # Make sure venv is activated
+pip install -e .          # Reinstall if needed
+
+# Import errors
+cd /path/to/personal_history  # Install from root directory
+pip uninstall personal-history -y && pip install -e .
+
+# Testing features
+ph demo  # Run the demonstration
+ph --help  # See all commands
+```
+
+### Need More Help?
+- Check `ph/v001/README.md` for technical details
+- Run `ph <command> --help` for command-specific help
+- Use `ph demo` to see all features in action
+
+## Contributing
+
+The project uses a clean git workflow:
+- `main` branch: Stable releases
+- `dev` branch: Current development (you're here!)
+- `feature/*` branches: Individual features
+
+To contribute:
+1. Fork the repository
+2. Create a feature branch from `dev`
+3. Make your changes
+4. Submit a pull request to `dev`
 
 ## License
 

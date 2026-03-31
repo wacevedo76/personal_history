@@ -6,67 +6,67 @@ Copyright 2024 William Acevedo
 # PERSONAL HISTORY
 
 ## Goals
-PERSONAL HISTORY is way to quickly and easily journal all personal human activity
+PERSONAL HISTORY is a way to quickly and easily journal all personal human activity
 that adds verification to all entries.
 
-## Rational
+## Rationale
 Now you may be wondering, why would anyone ever want to do this.
-Other questions and concerns regarding privacy, ethics, and public safty arise. 
+Other questions and concerns regarding privacy, ethics, and public safety arise. 
 
-Setting these concerns aside for a moment, let me supply some, for what many may
+Setting these concerns aside for a moment, let me supply some reasons for what many may
 agree is (or should be) a fundamental right of any human being:
 
-* The Right to Free Speach
+* The Right to Free Speech
 
-Many will argue that all speech should not be free, However, there is
-particularly one aspect of Free Speech the I would like to focus on:
+Many will argue that all speech should not be free. However, there is
+particularly one aspect of Free Speech that I would like to focus on:
 
 * That aspect is the Freedom to Share
 
-This Freedom is not being attacted by any government, but by technology.
-It is so easy the manipulate video, audio, using modern software, not even 
-mentioning text, because mass text manipulation tools have existed not shortly 
+This Freedom is not being attacked by any government, but by technology.
+It is so easy to manipulate video and audio using modern software, not even 
+mentioning text, because mass text manipulation tools have existed since shortly 
 after the invention of the microcontroller (not sure, maybe even earlier) but 
-now have become even tools a lay person can use.
+now have become tools that even a lay person can use.
 
 We now have the technology to map the human face digitally, and use this 
-digital information to replicate that person's likeness virtually, on still image and
-in video. Grant it, the technology is in its early stages, but with the rise
-more powerful machines, and software development, and Artificial Intelligence 
-it will no doubt improve exponetially relativly quickly.
+digital information to replicate that person's likeness virtually, in still images and
+in video. Granted, the technology is in its early stages, but with the rise
+of more powerful machines, software development, and Artificial Intelligence,
+it will no doubt improve exponentially relatively quickly.
 
 There needs to be a quick, effortless, and most importantly, a method 
-to what I term "Irrifutable Verification" of tracking aspects of life.
+to what I term "Irrefutable Verification" of tracking aspects of life.
 
-Bind to this need is the Right To Share. 
+Bound to this need is the Right To Share. 
 
 ## The Right To Share
 
-All People like to share. 
+All people like to share. 
 
 How many of us have any sort of social media account?
 And even if you don't, have you never shown a photo album of any kind to
-another person? Or shared a story? To any other human? Ever?
+another person? Or shared a story? With any other human? Ever?
 
 We all like to share. The motivations behind, or the countless other implications
-suggested by this statement aside for a moment, and realize that it is the rare
-human who has lived to maturity and never shared a photo, a memory, or story 
+suggested by this statement set aside for a moment, and realize that it is the rare
+human who has lived to maturity and never shared a photo, a memory, a story,
 or a moment which they found memorable.
 
-Couple with the Right to Free Speech, which includes the right not to be compelled 
+Coupled with the Right to Free Speech, which includes the right not to be compelled 
 to say anything.
 
 ## What is Personal History?
 
 The Personal History file is simply a JSON data file where you can quickly record, and
-effotlessly save whatever it is you want to share, in a file which you 
+effortlessly save whatever it is you want to share, in a file which you 
 completely own. Every set of shared data is then used in conjunction with 
-other unique data to generate a hash (the hashin algorithm used is sha256, for reference,
-but will will simply be refered to as hash for the remainder of this document)
-key that is unique and directly tide to the data you shared.
+other unique data to generate a hash (the hashing algorithm used is SHA-256, for reference,
+but we will simply refer to it as hash for the remainder of this document)
+key that is unique and directly tied to the data you shared.
 
-If the data is changed or manipuated in any way, the generated key will not only 
-not match coresponding data, but also compromising the integrity of all data 
+If the data is changed or manipulated in any way, the generated key will not only 
+not match corresponding data, but also compromise the integrity of all data 
 entered thereafter.
 
 The goal is to generate a file, which you keep, like a journal, that  
@@ -76,236 +76,239 @@ This makes you, the individual, the owner of your data.
 
 There are so many aspects of this, especially with modern Analytics tools, that
 compelled me to start this project. However, the one aspect that excites me 
-most is the idea that now, you can be the true owner of what your share
-you control whatever narative you wish to project to the world, verifiably.
+most is the idea that now, you can be the true owner of what you share,
+you control whatever narrative you wish to project to the world, verifiably.
 
-## Personal History Schema
+## Personal History Schema (v0.01)
 
-Here is a rough idea of what the Personal History data file would look like:
+Here is the actual schema for Personal History v0.01 files:
 
-```
-{"profile": {
-    "username": "wacevedo",
-    "firstname": "William",
-    "lastname": "Acevedo",
-    "password": "encrypted_password"
+```json
+{
+  "version": "0.01.0",
+  "identity": {
+    "hash": "ef80b785e912a38d1ceb69f904e6421d170af9242644d9e397b7a3faf5cc4eb4",
+    "name": "William"
   },
-  "years": [
+  "timeline": [
     {
-      "year": 2023,
-      "year_hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
-      "months": [
+      "date": "2024-03-30",
+      "timestamp": {
+        "commitment": "2e837676ffac7007790e77786bc9886fea1f75daa84518c53c175ca5d774efe5"
+      },
+      "activities": [
         {
-          "month": 12,
-          "month_hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
-          "days": [
-            {
-              "date": 09,
-              "day_hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
-              "habits": {
-                "pushups": {
-                  "pushups-hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
-                  "shareable": "true",
-                  "completed": "100"
-                },
-                "pilaties": {
-                  "pilaties-hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
-                  "shareable": "true",
-                  "completed": "1"
-                },
-                "wallsits": {
-                  "wallsits-hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
-                  "shareable": "true",
-                  "completed": "1"
-                },
-                "sqats": {
-                  "sqats-hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
-                  "shareable": "true",
-                  "completed": "20"
-                },
-                "meditation": {
-                  "meditation-hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
-                  "sharable": "true",
-                  "completed": "1"
-                }
-              }
-            },
-            {
-              "date": 08,
-              "day_hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
-              "habits": {
-                "pushups": {
-                  "pushups-hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
-                  "shareable": "true",
-                  "completed": "100"
-                },
-                "pilaties": {
-                  "pilaties-hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
-                  "shareable": "true",
-                  "completed": "1"
-                },
-                "wallsits": {
-                  "wallsits-hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
-                  "shareable": "true",
-                  "completed": "1"
-                },
-                "sqats": {
-                  "sqats-hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
-                  "shareable": "true",
-                  "completed": "20"
-                },
-                "meditation": {
-                  "meditation-hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
-                  "sharable": "true",
-                  "completed": "1"
-                }
-              }
-            }
-          ]
+          "type": "work",
+          "data": {
+            "project": "Personal History Development"
+          },
+          "duration": 120,
+          "timestamp": {
+            "commitment": "a7288cb555fbc77598a95e7bc5012f04a7fe82bcffe00fc2189a28c96af1df7d"
+          },
+          "shareable": true,
+          "hash": "58ae00e2c2e31017bf8d79b45e7384e2f6219e400005fd2036eadd43a2ecc65f"
+        },
+        {
+          "type": "exercise",
+          "data": {
+            "distance_km": 5.0
+          },
+          "duration": 45,
+          "timestamp": {
+            "commitment": "b8397cb555fbc77598a95e7bc5012f04a7fe82bcffe00fc2189a28c96af1df8e"
+          },
+          "shareable": true,
+          "hash": "68bf11f3d3e42128cf9e8ac56e8495f3f732af511116fe3147fbde54b3fdd76g"
+        },
+        {
+          "type": "family",
+          "data": {
+            "meal": "dinner",
+            "with": ["spouse", "children"]
+          },
+          "duration": 90,
+          "timestamp": {
+            "commitment": "c9408dc666gcd886a9ba6f8cd6123g15b8gf93cdggf11gd329b39d07cbf2eg79f"
+          },
+          "shareable": false,
+          "hash": "79cg22g4e4f53239dg0f9bd67f95a6g4g843bg622227gf4258cgef64c4gee87h"
         }
-      ]
+      ],
+      "hash": "6b16dc99c18a266dd77448a4204ab28b99033dd20cf0040e1488054a9ff31d3b"
+    },
+    {
+      "date": "2024-03-29",
+      "timestamp": {
+        "commitment": "3f948787ggbd81188a1f88897cd0997gfb2g86ebb95629d64d286db6e885gfc6"
+      },
+      "activities": [
+        {
+          "type": "learning",
+          "data": {
+            "topic": "Python MVC Architecture"
+          },
+          "duration": 180,
+          "timestamp": {
+            "commitment": "d0519ed777hde997bacb7g9de7234h26c9hg4dehhg22he43c4ae18dch3fh8ag0"
+          },
+          "shareable": true,
+          "hash": "8adh33h5f5g6434ae1g0ace8g06b7h5h954ch733338hg5369dhfg75d5hff98i"
+        }
+      ],
+      "hash": "7c27edaa29b377ee887559b531bc39ca0a144ee31dg1151f2599166b0gg42e4c"
     }
-  ]
+  ],
+  "signature": "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8"
 }
 ```
 
-## How It works:
-Whenever a new Personal History file is created it will generate:
-* A data Set containing:
-  * First name, Last name, date, and time
-  * two hashed values representing two pieces of unique and private Personal identifying information (e.g., taxid, password)
+### Schema Components
 
-example in python:
-```
--- example values:
+#### 1. **Root Level**
+- `version`: Always "0.01.0" for v0.01
+- `identity`: Cryptographic identity information
+- `timeline`: Chronological list of days
+- `signature`: Optional Ed25519 signature (128 hex characters)
 
-firstname = "herman", 
-lastname = "munster", 
-tax_id = "8765309", 
-password = "123456789"
-```
+#### 2. **Identity Object**
+- `hash`: SHA-256 hash of the identity (64 hex characters)
+- `name`: Optional human-readable name
 
--- example output of function used to generate desired output:
-```
-generate_priliminary_hash_values(firstname, lastname, tax_id, password)
-```
+#### 3. **Day Object** (in timeline)
+- `date`: ISO 8601 date (YYYY-MM-DD)
+- `timestamp.commitment`: Hash commitment for the day
+- `activities`: List of activities for that day
+- `hash`: SHA-256 hash of the day (64 hex characters)
 
-output:
-There are two sets of data created:
-..* the date and time this data was created, and the first and last name in clear text.
-..* Hashes created from the firstname, lastname
-```
-[
-    {'encoded_creation_time': '1710540432.688816', # epoch time number converts to 15/03/2024 23:07
-     'firstname': 'herman',
-     'lastname': 'munster'},
+#### 4. **Activity Object**
+- `type`: Activity category (work, exercise, family, learning, planning, health, social)
+- `data`: Optional activity-specific data (project, distance_km, meal, with people, etc.)
+- `duration`: Duration in minutes (integer)
+- `timestamp.commitment`: Hash commitment hiding exact start/end times
+- `shareable`: Boolean indicating if activity can be shared publicly
+- `hash`: SHA-256 hash of the activity (64 hex characters)
 
-    {'hashed_creation_time': '7b6197b0e5f3f29c2a1df1715c287050b91ecfe68e2f04d572c74ead907c16e6',
-    'hashed_tax_id': '5cfaae462bf88066c36bed21fb07bbee16acf6b110840f57c7b2a760dbc80919',         
-    'hashed_password': '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225',
-    'hashed_firstname': '3bf39bf3fe465c0600105b3451f274fa9f05b3c706f022608c0fb28285fe5cbf',
-    'hashed_lastname': '7cbd75a33e3f9ceba58eab97dd18cd7866d398f3d56542d64e80a369a36dadab'}
-]
-```
+#### 5. **Hash Chain Verification**
+- Each activity hash is computed from its content
+- Day hash is computed from date + sorted activity hashes
+- File can be signed with Ed25519 for cryptographic verification
+- Changing any data breaks the hash chain
 
-### to reiterate:
-* The data creation time (epoch) is 1710540432.688816, which converts to 15/03/2024 23:07 **equals** 7b6197b0e5f3f29c2a1df1715c287050b91ecfe68e2f04d572c74ead907c16e6
-* If any part of the date or time is changed, in any form, the original hash number will not match.
-* This process of verification can be done with any, and all forms of data (text, images, video, audio)
-    
-### This data set is saved within the Personal History File, and then this data is used to generate the file name and used as the first hash which identifies the current year.
+## How It Works (v0.01 Implementation)
 
-## Why is hashing important?
-Hashing is "one way", meaning that while the information can be verified with the hash number,
-the hash number can not be used to generate, or get the original information, i,e:
+Personal History v0.01 uses a modern cryptographic approach for identity and verification:
 
-your tax ID is: 123456789, and this number is used generate "5cfaae462bf88066c36bed21fb07bbee16acf6b110840f57c7b2a760dbc80919",
-however, "5cfaae462bf88066c36bed21fb07bbee16acf6b110840f57c7b2a760dbc80919" can not be used to 
-generate your tax ID. This is a common menthod of authentication for websites, meaning this is how 
-they verify your password without storing your actual password on their servers.
+### 1. **Identity Creation**
+When you run `ph init`, the system generates:
+- **Ed25519 key pair** (public/private keys) for cryptographic signatures
+- **Identity hash** derived from public key + salt + optional name
+- **Salt** for additional security
 
-example in python code using previously generated data:
-```
-personal_history_userdata01 = [
-    {'encoded_creation_time': '1710540432.688816', <- epoch time number converts to 15/03/2024 23:07 ```
-     'firstname': 'herman',
-     'lastname': 'munster'},
-                                                                                                     
-    {'hashed_creation_time': '7b6197b0e5f3f29c2a1df1715c287050b91ecfe68e2f04d572c74ead907c16e6',
-    'hashed_tax_id': '5cfaae462bf88066c36bed21fb07bbee16acf6b110840f57c7b2a760dbc80919',         
-    'hashed_password': '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225',
-    'hashed_firstname': '3bf39bf3fe465c0600105b3451f274fa9f05b3c706f022608c0fb28285fe5cbf',
-    'hashed_lastname': '7cbd75a33e3f9ceba58eab97dd18cd7866d398f3d56542d64e80a369a36dadab'}
-]
-```
-Using this data, we can now generate the file name and the hash for the current year:
+Example identity creation:
+```python
+from ph.v001.models.identity import Identity
 
-Possible function in Python:
-```
-create_ph_hashed_day_file_name(personal_history_userdata01)
-```
-Output:
-```
-['b8b77a5b311fb3a27b425bcab6a170fc499a2fe68170f50a2baa82bdacc3ea25',
- [{'encoded_creation_time': '1710540432.688816',
-   'firstname': 'herman',
-   'lastname': 'munster'},
-  {'hashed_creation_time': '7b6197b0e5f3f29c2a1df1715c287050b91ecfe68e2f04d572c74ead907c16e6',
-   'hashed_tax_id': '5cfaae462bf88066c36bed21fb07bbee16acf6b110840f57c7b2a760dbc80919',
-   'hashed_password': '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225',
-   'hashed_firstname': '3bf39bf3fe465c0600105b3451f274fa9f05b3c706f022608c0fb28285fe5cbf',
-   'hashed_lastname': '7cbd75a33e3f9ceba58eab97dd18cd7866d398f3d56542d64e80a369a36dadab'}]]
+# Create and generate identity
+identity = Identity(name="William")
+identity.generate()
+
+print(f"Identity Hash: {identity.identity_hash}")
+print(f"Public Key: {identity.public_key[:32]}...")
+print(f"Created: {identity.created_at}")
 ```
 
-The first value in the list provided above:
-```
-b8b77a5b311fb3a27b425bcab6a170fc499a2fe68170f50a2baa82bdacc3ea25
-```
-Is a hash value generated from the combination of:
-* hashed_creation_time
-* hashed_tax_id
-* hashed_password
-* hashed_firstname
-* hashed_lastname
+### 2. **Activity Creation with Timestamp Commitments**
+Each activity includes exact timestamps that are cryptographically hidden:
 
-and will be both the primary file name, and the hashed value of the current year.
+```python
+from ph.v001.models.activity import Activity
+from datetime import datetime, timedelta
 
-filename:
+# Create an activity with exact timestamps
+activity = Activity(
+    activity_type="work",
+    data={"project": "Personal History"},
+    duration=120,  # 2 hours in minutes
+    exact_start="2024-03-30T09:00:00Z",
+    exact_end="2024-03-30T11:00:00Z",
+    shareable=True
+)
+
+# The exact timestamps are hidden in a commitment
+print(f"Activity Hash: {activity.hash}")
+print(f"Timestamp Commitment: {activity.commitment}")
+print(f"Shareable: {activity.shareable}")
 ```
-b8b77a5b311fb3a27b425bcab6a170fc499a2fe68170f50a2baa82bdacc3ea25.ph
+
+### 3. **Hash Chain Verification**
+The system creates a verifiable chain of hashes:
+
+1. **Activity Hash**: SHA-256 of activity data + timestamps
+2. **Day Hash**: SHA-256 of date + sorted activity hashes  
+3. **File Hash**: SHA-256 of version + identity + sorted day hashes
+4. **Signature**: Optional Ed25519 signature of file hash
+
+### 4. **Timestamp Privacy**
+Exact start/end times are stored in the `_private` field but hidden from the public file:
+- `exact_start`: ISO 8601 timestamp when activity began
+- `exact_end`: ISO 8601 timestamp when activity ended  
+- `nonce`: Random value to prevent timing attacks
+- `commitment`: SHA-256 hash of `exact_start + exact_end + nonce`
+
+This allows verification that timestamps haven't been altered without revealing exact times.
+
+### 5. **File Structure**
 ```
-and contents of file:
+personal_history.ph.json
+├── version: "0.01.0"
+├── identity: {hash, name}
+├── timeline: [
+│   ├── day1: {date, hash, activities: [...]}
+│   ├── day2: {date, hash, activities: [...]}
+│   └── ...
+│   ]
+└── signature: "ed25519_signature_here" (optional)
 ```
-{"profile": {
-    "firstname": "herman",
-    "lastname": "munster",
-    "creation_date": "1710540432.688816",
-    "tax_id": "5cfaae462bf88066c36bed21fb07bbee16acf6b110840f57c7b2a760dbc80919"
-    "password": "15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225"
-  },
-  "years": [
-    {
-      "year": 2023,
-      "year_hash": "7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069",
+
+## Why Cryptography Matters
+
+### **Hash Functions (SHA-256)**
+- **One-way**: Easy to compute hash, impossible to reverse
+- **Deterministic**: Same input always produces same hash
+- **Avalanche effect**: Tiny change produces completely different hash
+- **Collision resistant**: Extremely unlikely two inputs produce same hash
+
+Example:
+```python
+import hashlib
+
+data = "Personal History Activity"
+hash_result = hashlib.sha256(data.encode()).hexdigest()
+# Result: "a1b2c3d4..." (64 hex characters)
+# Change one character → completely different hash
 ```
-## Okay, so now what?
-Once the year hash has been generated, the content creation flow goes as follows:
 
-#### In essense, each layer of data is created by using a combination of:
-* up to the previous 10 hashes.
-* and any relavent data needed at that specific current level.
+### **Digital Signatures (Ed25519)**
+- **Identity proof**: Proves file was created by identity owner
+- **Integrity proof**: Proves file hasn't been altered
+- **Non-repudiation**: Creator cannot deny creating the file
 
-#### The month hash is generated by using a combination of:
-* the preceeding hash (in this case, the year hash).
-* the Time the Month hash creation takes place.   
-*NOTE*: the month container has its own hash for identification, as well as data integrity purposes
+### **Timestamp Commitments**
+- **Privacy**: Exact times hidden but verifiable
+- **Integrity**: Can prove timestamps haven't changed
+- **Selective disclosure**: Can reveal exact times later if needed
 
-#### The Day hash is generated by using a combination of:
-* The combined text of both the the month and year hashes
-* and the text of the data that is beeing collected.
-* and the date and time the data is collected.  
+## Verification Process
 
-There may be multiple, dozens, multiple data points per day, and each data point will have its own hash, and the day hash will be a combination of all the data point hashes.
+Anyone can verify a Personal History file:
+
+1. **Check hashes**: Recompute activity → day → file hashes
+2. **Verify signature**: Validate Ed25519 signature if present  
+3. **Check commitments**: Verify timestamp commitments match
+4. **Validate schema**: Ensure JSON structure follows v0.01 spec
+
+This creates what you termed "Irrefutable Verification" - cryptographic proof that the data is authentic and unaltered.
 
 ## Current Implementation (v0.01)
 
@@ -342,22 +345,38 @@ The project has evolved into a practical Python implementation with a command-li
 - Backward compatible with existing code
 - Extensible for future features
 
-### 📊 Data Structure
+### 📊 v0.01 Data Structure
 
-Personal History v0.01 files contain:
-- **Identity**: Cryptographic identity with public/private keys
-- **Timeline**: Chronological days with activities
-- **Activities**: Time-stamped entries with optional data
-- **Hashes**: SHA-256 hashes for verification
-- **Signatures**: Optional Ed25519 signatures
+Personal History v0.01 implements a practical, cryptographically-verifiable format:
 
-Each activity includes:
-- Type (work, exercise, meal, etc.)
-- Duration in minutes
-- Optional data (project, distance, people, etc.)
-- Shareable flag for privacy control
-- Exact timestamps (hidden in commitment)
-- Cryptographic commitments for verification
+#### **Core Components**
+- **Identity**: Ed25519 key pair + identity hash (not personal info like tax ID)
+- **Timeline**: Simple chronological list of days (not nested years/months)
+- **Activities**: Flexible entries with type, duration, and optional data
+- **Hashes**: SHA-256 chain for verification (activity → day → file)
+- **Signatures**: Optional Ed25519 signatures for cryptographic proof
+
+#### **Activity Types (v0.01)**
+- `work` - Professional activities (with optional `project` field)
+- `family` - Family time (with optional `meal`, `with` people)
+- `exercise` - Physical activity (with optional `distance_km`)
+- `learning` - Educational activities (with optional `topic`)
+- `planning` - Planning/organization activities
+- `health` - Health/wellness activities
+- `social` - Social interactions
+
+#### **Privacy Controls**
+- `shareable: true/false` - Per-activity privacy setting
+- Timestamp commitments - Hide exact times while allowing verification
+- No personal identifiers in public files - Only cryptographic hashes
+
+#### **Compared to Original Vision**
+The v0.01 implementation evolved from the original concept:
+- **Simpler structure**: Timeline instead of nested years/months
+- **Better cryptography**: Ed25519 signatures instead of password/tax ID hashes
+- **Practical privacy**: Shareable flags instead of all-or-nothing
+- **Extensible data**: Flexible activity data instead of fixed "habits"
+- **Real-world usability**: CLI with time tracking instead of just file format
 
 ### Quick Start
 
@@ -590,19 +609,20 @@ pip install -e .
 
 ## From Vision to Reality
 
-### Original Vision → Current Implementation
+### Evolution: Original Vision → v0.01 Implementation
 
-| Original Concept | Current v0.01 Implementation |
-|-----------------|-----------------------------|
-| **Philosophical foundation** of "Right to Share" | ✅ Preserved in architecture |
-| **JSON data structure** for personal history | ✅ Implemented with schema validation |
-| **Hash-based verification** chain | ✅ SHA-256 hashes with cryptographic commitments |
-| **Privacy controls** (shareable flags) | ✅ Activity-level privacy controls |
-| **Timestamp integrity** | ✅ ISO 8601 timestamps with hidden exact times |
-| **Command-line interface** | ✅ Full-featured CLI with 11 commands |
-| **Time tracking** | ✅ Start/stop/tasks system with automatic timing |
-| **Data analysis** | ✅ Analyze, timestamps, CSV export features |
-| **Extensible architecture** | ✅ MVC pattern ready for APIs, web interfaces |
+| Original Concept | v0.01 Implementation | Notes |
+|-----------------|---------------------|-------|
+| **Nested structure** (years/months/days) | **Flat timeline** with days | Simplified for usability |
+| **Personal identifiers** (tax ID, password) | **Cryptographic identity** (Ed25519 keys) | Better privacy & security |
+| **Fixed "habits" structure** | **Flexible activity types** with optional data | More practical for real use |
+| **All-or-nothing sharing** | **Per-activity `shareable` flag** | Granular privacy control |
+| **Conceptual file format** | **Working CLI with 11 commands** | Actually usable tool |
+| **Manual time entry** | **Smart duration parsing + time tracking** | `ph start/stop/tasks` commands |
+| **Basic hash verification** | **Full hash chain + Ed25519 signatures** | Cryptographic proof |
+| **Theoretical timestamp hiding** | **Actual timestamp commitments** | Hidden exact times, verifiable |
+| **Static data structure** | **MVC architecture** | Ready for APIs, web interfaces |
+| **Philosophical "Right to Share"** | **Practical implementation** | Vision realized in working code |
 
 ### What Makes Personal History Unique
 
@@ -633,6 +653,89 @@ ph --help  # See all commands
 - Check `ph/v001/README.md` for technical details
 - Run `ph <command> --help` for command-specific help
 - Use `ph demo` to see all features in action
+
+## Development
+
+### Logging Module
+
+Personal History includes a comprehensive logging module for development and debugging. The logging system tracks command execution, operations, errors, performance metrics, and user interactions.
+
+#### Features
+- **Multi-level logging**: Command, operation, error, performance, and user interaction logging
+- **Multiple output formats**: Human-readable logs + structured JSON logs
+- **Easy integration**: Decorators, context managers, and wrapper classes
+- **Log analysis**: Built-in tools for analyzing and exporting logs
+
+#### Quick Start
+
+```python
+# Basic logging usage
+from ph.logging_module import get_logger
+
+logger = get_logger()
+logger.log_command("add", {"type": "work", "duration": "60"}, user="developer")
+```
+
+#### Integration Options
+
+1. **Quick Patch** (Minimal changes):
+```python
+from ph.logging_integration import patch_existing_cli
+patch_existing_cli()
+# Existing CLI now logs everything
+```
+
+2. **New Entry Point** (Recommended):
+```python
+# ph_logged.py
+from ph.logging_integration import LoggingCLIEntryPoint
+LoggingCLIEntryPoint.main()
+```
+
+3. **Selective Integration**:
+```python
+from ph.logging_module import log_operation
+
+@log_operation("create_activity", get_logger())
+def create_activity(...):
+    # Your code
+```
+
+#### Log Files
+Logs are stored in `~/.personal_history/logs/`:
+- `ph_YYYYMM.log` - Human-readable logs (monthly rotation)
+- `ph_structured_YYYYMM.log` - JSON structured logs (monthly rotation)
+
+#### Testing
+Run the logging test suite:
+```bash
+python test_logging.py
+```
+
+For detailed documentation, see [LOGGING_MODULE.md](LOGGING_MODULE.md) and [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md).
+
+### Running Tests
+The project includes comprehensive test suites:
+
+```bash
+# Basic functionality tests
+python test_simple.py
+
+# Installation verification
+python verify_installation.py
+
+# Complete workflow test
+python simple_ph_test.py
+
+# Logging module tests
+python test_logging.py
+```
+
+### Development Setup
+1. Create virtual environment: `python3 -m venv venv`
+2. Activate: `source venv/bin/activate`
+3. Install in development mode: `pip install -e .`
+4. Run tests to verify installation
 
 ## Contributing
 

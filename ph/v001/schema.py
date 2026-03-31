@@ -33,6 +33,7 @@ class PHSchemaValidator:
     VERSION = "0.01.0"
     HASH_PATTERN = re.compile(r"^[a-f0-9]{64}$")
     SIGNATURE_PATTERN = re.compile(r"^[a-f0-9]{128}$")
+    BASE64_SIGNATURE_PATTERN = re.compile(r"^[A-Za-z0-9+/]{86,88}={0,2}$")  # For base64 encoded signatures
     DATE_PATTERN = re.compile(r"^\d{4}-\d{2}-\d{2}$")
     
     # Allowed activity types from v0.01 spec
@@ -263,9 +264,11 @@ class PHSchemaValidator:
     
     def _validate_signature(self, signature: str, errors: List[str]):
         """Validate signature field."""
-        if not self.SIGNATURE_PATTERN.match(signature):
+        # Signatures can be either 128 hex characters or base64 encoded
+        if not (self.SIGNATURE_PATTERN.match(signature) or 
+                self.BASE64_SIGNATURE_PATTERN.match(signature)):
             errors.append(
-                f"Invalid signature: must be 128 hex characters, got '{signature[:20]}...'"
+                f"Invalid signature: must be 128 hex characters or valid base64, got '{signature[:20]}...'"
             )
     
     def _check_timeline_gaps(self, timeline: List[Dict[str, Any]], warnings: List[str]):

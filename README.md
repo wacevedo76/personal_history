@@ -712,6 +712,9 @@ Run the logging test suite:
 python test_logging.py
 ```
 
+#### Example
+See `examples/logging_example.py` for a complete demonstration of all logging features.
+
 For detailed documentation, see [LOGGING_MODULE.md](LOGGING_MODULE.md) and [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md).
 
 ### Running Tests

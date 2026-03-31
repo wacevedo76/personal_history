@@ -104,8 +104,13 @@ class PersonalHistoryFile:
             print(f"Error signing file: {e}")
             return False
     
-    def verify_signature(self) -> bool:
-        """Verify file signature using Ed25519 cryptography"""
+    def verify_signature(self, identity_file_path: Optional[Path] = None) -> bool:
+        """Verify file signature using Ed25519 cryptography
+        
+        Args:
+            identity_file_path: Path to identity.json file. If None, tries to load
+                               from default location (~/.personal_history/identity.json)
+        """
         if not self.signature:
             return False
         
@@ -115,10 +120,35 @@ class PersonalHistoryFile:
         from cryptography.hazmat.primitives.asymmetric import ed25519
         from cryptography.hazmat.primitives import serialization
         import base64
+        import json
+        from pathlib import Path
         
         try:
+            # Load full identity with public key
+            if identity_file_path is None:
+                # Try default location
+                identity_file_path = Path.home() / ".personal_history" / "identity.json"
+            
+            if not identity_file_path.exists():
+                print(f"Identity file not found: {identity_file_path}")
+                return False
+            
+            with open(identity_file_path, 'r') as f:
+                full_identity_data = json.load(f)
+            
+            # Check identity hash matches
+            if full_identity_data.get("identity_hash") != self.identity.identity_hash:
+                print("Identity hash mismatch")
+                return False
+            
+            # Get public key from full identity
+            public_key_b64 = full_identity_data.get("public_key")
+            if not public_key_b64:
+                print("No public key in identity file")
+                return False
+            
             # Decode public key and signature
-            public_key_bytes = base64.b64decode(self.identity.public_key)
+            public_key_bytes = base64.b64decode(public_key_b64)
             signature_bytes = base64.b64decode(self.signature)
             
             # Create public key object
@@ -130,6 +160,8 @@ class PersonalHistoryFile:
             
         except Exception as e:
             print(f"Error verifying signature: {e}")
+            import traceback
+            traceback.print_exc()
             return False
     
     def save(self, filepath: Path, include_private: bool = False):
@@ -150,8 +182,12 @@ class PersonalHistoryFile:
         
         return cls.from_dict(data)
     
-    def verify(self) -> bool:
-        """Verify entire file integrity"""
+    def verify(self, identity_file_path: Optional[Path] = None) -> bool:
+        """Verify entire file integrity
+        
+        Args:
+            identity_file_path: Path to identity.json file for signature verification
+        """
         # Verify identity
         if not self.identity.verify():
             return False
@@ -162,7 +198,7 @@ class PersonalHistoryFile:
                 return False
         
         # Verify signature if present
-        if self.signature and not self.verify_signature():
+        if self.signature and not self.verify_signature(identity_file_path):
             return False
         
         return True

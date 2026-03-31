@@ -73,20 +73,21 @@ class PersonalHistoryFile:
         return hashlib.sha256(hash_input.encode()).hexdigest()
     
     def sign(self, private_key: Optional[str] = None) -> bool:
-        """Sign the file"""
+        """Sign the file using Ed25519 cryptography"""
         if not private_key and not self.identity.private_key:
             return False
         
         file_hash = self.calculate_file_hash()
         
+        # Use cryptography library (required)
+        from cryptography.hazmat.primitives.asymmetric import ed25519
+        from cryptography.hazmat.primitives import serialization
+        import base64
+        
+        # Use provided private key or identity's private key
+        key_to_use = private_key or self.identity.private_key
+        
         try:
-            from cryptography.hazmat.primitives.asymmetric import ed25519
-            from cryptography.hazmat.primitives import serialization
-            import base64
-            
-            # Use provided private key or identity's private key
-            key_to_use = private_key or self.identity.private_key
-            
             # Decode private key
             private_key_bytes = base64.b64decode(key_to_use)
             
@@ -99,25 +100,23 @@ class PersonalHistoryFile:
             
             return True
             
-        except ImportError:
-            # Simulated signature for demonstration
-            self.signature = "a" * 128  # 128-character simulated signature
-            return True
-        except Exception:
+        except Exception as e:
+            print(f"Error signing file: {e}")
             return False
     
     def verify_signature(self) -> bool:
-        """Verify file signature"""
+        """Verify file signature using Ed25519 cryptography"""
         if not self.signature:
             return False
         
         file_hash = self.calculate_file_hash()
         
+        # Use cryptography library (required)
+        from cryptography.hazmat.primitives.asymmetric import ed25519
+        from cryptography.hazmat.primitives import serialization
+        import base64
+        
         try:
-            from cryptography.hazmat.primitives.asymmetric import ed25519
-            from cryptography.hazmat.primitives import serialization
-            import base64
-            
             # Decode public key and signature
             public_key_bytes = base64.b64decode(self.identity.public_key)
             signature_bytes = base64.b64decode(self.signature)
@@ -129,10 +128,8 @@ class PersonalHistoryFile:
             public_key_obj.verify(signature_bytes, file_hash.encode())
             return True
             
-        except ImportError:
-            # For simulated cryptography, check if it's our dummy signature
-            return self.signature == "a" * 128
-        except Exception:
+        except Exception as e:
+            print(f"Error verifying signature: {e}")
             return False
     
     def save(self, filepath: Path, include_private: bool = False):

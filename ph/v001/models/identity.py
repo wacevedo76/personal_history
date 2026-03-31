@@ -25,35 +25,30 @@ class Identity:
         # Generate salt
         self.salt = secrets.token_hex(16)  # 16 bytes = 32 hex chars
         
-        # Generate key pair
-        try:
-            from cryptography.hazmat.primitives.asymmetric import ed25519
-            from cryptography.hazmat.primitives import serialization
-            
-            # Generate Ed25519 key pair
-            private_key = ed25519.Ed25519PrivateKey.generate()
-            public_key = private_key.public_key()
-            
-            # Serialize keys
-            self.private_key = base64.b64encode(
-                private_key.private_bytes(
-                    encoding=serialization.Encoding.Raw,
-                    format=serialization.PrivateFormat.Raw,
-                    encryption_algorithm=serialization.NoEncryption()
-                )
-            ).decode()
-            
-            self.public_key = base64.b64encode(
-                public_key.public_bytes(
-                    encoding=serialization.Encoding.Raw,
-                    format=serialization.PublicFormat.Raw
-                )
-            ).decode()
-            
-        except ImportError:
-            # Fallback: simulated cryptography
-            self.private_key = base64.b64encode(secrets.token_bytes(32)).decode()
-            self.public_key = base64.b64encode(secrets.token_bytes(32)).decode()
+        # Generate key pair using cryptography library
+        # This is now required, not optional
+        from cryptography.hazmat.primitives.asymmetric import ed25519
+        from cryptography.hazmat.primitives import serialization
+        
+        # Generate Ed25519 key pair
+        private_key = ed25519.Ed25519PrivateKey.generate()
+        public_key = private_key.public_key()
+        
+        # Serialize keys
+        self.private_key = base64.b64encode(
+            private_key.private_bytes(
+                encoding=serialization.Encoding.Raw,
+                format=serialization.PrivateFormat.Raw,
+                encryption_algorithm=serialization.NoEncryption()
+            )
+        ).decode()
+        
+        self.public_key = base64.b64encode(
+            public_key.public_bytes(
+                encoding=serialization.Encoding.Raw,
+                format=serialization.PublicFormat.Raw
+            )
+        ).decode()
         
         # Calculate identity hash
         identity_data = f"{self.public_key}{self.salt}"

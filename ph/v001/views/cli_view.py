@@ -52,10 +52,12 @@ class CLIView:
         
         # Add command
         add_parser = subparsers.add_parser("add", help="Add activity to pending")
-        add_parser.add_argument("type", help="Activity type (work, family, exercise, etc.)")
+        add_parser.add_argument("type", nargs="?", default="general", 
+                               help="Activity type (work, family, etc. Default: general)")
         add_parser.add_argument("--duration", help="Duration in minutes or smart format")
         add_parser.add_argument("--date", help="Date (YYYY-MM-DD, defaults to today)")
         add_parser.add_argument("--project", help="Project name")
+        add_parser.add_argument("--description", help="Activity description")
         add_parser.add_argument("--meal", help="Meal type")
         add_parser.add_argument("--distance", type=float, help="Distance in km")
         add_parser.add_argument("--with-people", help="People involved (comma-separated)")
@@ -64,8 +66,9 @@ class CLIView:
         # Start command
         start_parser = subparsers.add_parser("start", help="Start timing an activity")
         start_parser.add_argument("activity", help="Activity name to start timing")
-        start_parser.add_argument("--type", help="Activity type (defaults to activity name)")
+        start_parser.add_argument("--type", default="general", help="Activity type (default: general)")
         start_parser.add_argument("--project", help="Project name")
+        start_parser.add_argument("--description", help="Activity description")
         start_parser.add_argument("--meal", help="Meal type")
         
         # Stop command
@@ -158,6 +161,8 @@ class CLIView:
         activity_data = {}
         if args.project:
             activity_data["project"] = args.project
+        if args.description:
+            activity_data["description"] = args.description
         if args.meal:
             activity_data["meal"] = args.meal
         if args.distance:
@@ -191,6 +196,8 @@ class CLIView:
         activity_data = {}
         if args.project:
             activity_data["project"] = args.project
+        if args.description:
+            activity_data["description"] = args.description
         if args.meal:
             activity_data["meal"] = args.meal
         

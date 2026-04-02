@@ -15,7 +15,10 @@ class Day:
     def __init__(self, date: str, activities: List[Activity]):
         self.date = date
         self.activities = activities
-        self._calculate_hash()
+        # Calculate commitment (hash is now a property)
+        activity_hashes = sorted([activity.hash for activity in self.activities])
+        commitment_input = self.date + "".join(activity_hashes)
+        self._commitment = hashlib.sha256(commitment_input.encode()).hexdigest()
     
     def _calculate_hash(self):
         """Calculate day hash from activities"""
@@ -24,11 +27,21 @@ class Day:
         
         # Create commitment input
         commitment_input = self.date + "".join(activity_hashes)
-        self.commitment = hashlib.sha256(commitment_input.encode()).hexdigest()
+        self._commitment = hashlib.sha256(commitment_input.encode()).hexdigest()
         
         # Calculate day hash
-        hash_input = self.date + self.commitment
-        self.hash = hashlib.sha256(hash_input.encode()).hexdigest()
+        hash_input = self.date + self._commitment
+        return hashlib.sha256(hash_input.encode()).hexdigest()
+    
+    @property
+    def hash(self):
+        """Day hash (recalculated on every access to ensure integrity)"""
+        return self._calculate_hash()
+    
+    @property
+    def commitment(self):
+        """Day commitment"""
+        return self._commitment
     
     def add_activity(self, activity: Activity):
         """Add activity to day"""
@@ -63,8 +76,7 @@ class Day:
         )
         
         # Override calculated values with stored ones
-        day.commitment = data.get("timestamp", {}).get("commitment", "")
-        day.hash = data.get("hash", "")
+        day._commitment = data.get("timestamp", {}).get("commitment", "")
         
         return day
     

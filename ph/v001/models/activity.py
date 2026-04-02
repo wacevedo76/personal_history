@@ -59,7 +59,12 @@ class Activity:
         if not self.shareable:
             hash_input += "private"
         
-        self.hash = hashlib.sha256(hash_input.encode()).hexdigest()
+        return hashlib.sha256(hash_input.encode()).hexdigest()
+    
+    @property
+    def hash(self):
+        """Activity hash (recalculated on every access to ensure integrity)"""
+        return self._calculate_hash()
     
     def to_dict(self, include_private: bool = False) -> Dict:
         """Convert to dictionary for JSON serialization"""
@@ -103,7 +108,6 @@ class Activity:
         
         # Override calculated values with stored ones
         activity.commitment = data.get("timestamp", {}).get("commitment", "")
-        activity.hash = data.get("hash", "")
         
         if "_private" in data:
             activity._private_nonce = data["_private"].get("nonce", "")

@@ -1,0 +1,5 @@
+# Main dependencies for Personal History
+# Install with: pip install -r requirements.txt
+# Or install in development mode: pip install -e .
+
+cryptography>=42.0.0

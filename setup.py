@@ -17,7 +17,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "ph=personal_history.ph.v001.cli:main",
+            "ph=personal_history.ph.v001.views.cli_view:main",
         ],
     },
     python_requires=">=3.8",

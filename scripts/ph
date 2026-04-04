@@ -1,0 +1,10 @@
+#!/bin/bash
+# Personal History CLI wrapper script
+# Use this if the pip entry point isn't created
+
+# Get the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
+
+# Run the CLI module
+python3 -m personal_history.ph.v001.views.cli_view "$@"
